@@ -1,28 +1,69 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <home></home>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Home from "./pages/Home.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    Home
   }
 };
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  padding: 16px;
+}
+.commands {
+  background-color: #f9f6f2;
+  border-radius: 3px;
+  color: #132743;
+  padding: 2px;
+}
+.commands li {
+  display: inline;
+}
+.command {
+  padding: 4px;
+}
+.command:hover {
+  color: #224372;
+}
+.textarea {
+  border: none;
+  background-color: white;
+  border-radius: 3px;
+  min-height: 24em;
+  height: 100%;
+  width: 100%;
+  resize: none;
+  padding: 8px;
+  font-size: 1.1em;
+  font-family: "Open Sans", sans-serif;
+}
+.info {
+  background-color: #8ba8b7;
+}
+.details li {
+  list-style-type: square;
+}
+button {
+  color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 4px;
+  width: 100%;
+}
+button:hover {
+  background-color: #8ba8b7;
 }
 </style>
