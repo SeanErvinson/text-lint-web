@@ -1,0 +1,141 @@
+*{
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+}
+html,body,ul,textarea{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    background-color: #407088;
+    color: white;
+}
+h1,h2,h3,h4,p{
+    margin: 0;
+}
+li{
+    list-style-type: none;
+}
+header{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+.wrapper{
+    width: 80%;
+    margin: 0 auto;
+    padding: 16px;
+}
+.commands{
+    background-color: #F9F6F2;
+    border-radius: 3px;
+    color: #132743;
+    padding: 2px;
+}
+.commands li{
+    display: inline;
+}
+.command{
+    padding: 4px;
+}
+.command:hover{
+    color: #224372;
+}
+.textarea{
+    border: none;
+    background-color: white;
+    border-radius: 3px;
+    min-height: 24em;
+    height: 100%;
+    width: 100%;
+    resize: none;
+    padding: 8px;
+    font-family: 'Open Sans', sans-serif;
+}
+.info{
+    background-color: #8BA8B7;
+}
+.details li{
+    list-style-type: square;
+}
+button{
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 4px;
+    width: 100%;
+}
+button:hover{
+    background-color: #8BA8B7;
+}
+footer{
+    background-color: #132743;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .textarea{
+        width: 100%;
+   }
+}
+
+/* @media screen and (max-width: 1200px) {
+    p{
+        font-size: .8em;
+    }
+} */
+
+@supports(display: grid){
+    .wrapper{
+        display: grid;
+   }
+    .source{
+        grid-area: source;
+   }
+    .controls{
+        grid-area: controls;
+   }
+    .result{
+        grid-area: result;
+   }
+    .info{
+        grid-area: info;
+   }
+    .details{
+        grid-area: details;
+   }
+   .left.commands{
+       grid-area: lcommand;
+   }
+   .right.commands{
+    grid-area: rcommand;
+}
+    @media screen and (max-width: 768px) {
+        .wrapper{
+            grid-auto-columns: 1fr;
+            grid-auto-rows:auto auto auto auto auto auto 1fr;
+            grid-template-areas: "lcommand" "source" "controls" "rcommand" "result" "info" "details";
+            row-gap: 10px;
+            column-gap: 10px;
+       }
+   }
+    @media screen and (min-width: 768px) {
+        .wrapper{
+            grid-auto-columns: 2fr 1fr 2fr;
+            grid-auto-rows: auto auto auto 1fr;
+            grid-template-areas:
+            "lcommand empty rcommand"
+            "source controls result"
+            "info info info"
+            "details details details";
+            row-gap: 8px;
+            column-gap: 10px;
+       }
+   }
+}

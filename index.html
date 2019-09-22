@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/123f74b29a.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    <title>Text Formatter</title>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Text Formatter</h1>
+            <h4>quickly format your text</h4>
+        </header>
+        <main class="wrapper">
+            <div class="left commands">
+                <ul>
+                    <li class="command"><i class="fas fa-upload"></i></li>
+                    <li class="command"><i class="far fa-clipboard"></i></li>
+                    |
+                    <li class="command"><i class="fas fa-eraser"></i></li>
+                </ul>
+            </div>
+            <div class="source">
+                <textarea class="textarea"></textarea>
+            </div>
+            <div class="controls">
+                <ul>
+                    <li>
+                        <button class="control-btn">Remove whitespaces</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="right commands">
+                <ul>
+                    <li class="command"><i class="fas fa-save"></i></li>
+                    <li class="command"><i class="far fa-clipboard"></i></li>
+                    |
+                    <li class="command"><i class="fas fa-eraser"></i></li>
+                </ul>
+            </div>
+            <div class="result">
+                <textarea class="textarea" readonly></textarea>
+            </div>
+            <div class="info">
+                Number of affected characters: 0
+            </div>
+            <div class="details">
+                <div class="how-tos">
+                    <h3>How to's</h3>
+                    <ul>
+                        <li>Regular expression are also supported. Give it a try <strong>\w.</strong></li>
+                    </ul>
+                </div>
+                <div class="how-tos">
+                    <h3>How to's</h3>
+                    <ul>
+                        <li>Regular expression are also supported. Give it a try <strong>\w</strong></li>
+                    </ul>
+                </div>
+                <div class="how-tos">
+                    <h3>Credits</h3>
+                    <p>Developed and maintained by Sean Ervinson. Special thanks to jsonlint.com for the inspiration.
+                        Source code can be found here.</p>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">&copy; 2019 textlint.com</footer>
+    </div>
+</body>
+
+</html>
