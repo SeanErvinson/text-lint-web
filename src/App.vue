@@ -1,26 +1,19 @@
 <template>
-  <div id="app">
     <home></home>
-  </div>
 </template>
 
 <script>
 import Home from "./pages/Home.vue";
 
 export default {
-  name: "app",
   components: {
     Home
-  }
+  },
+  name: "app"
 };
 </script>
 
 <style>
-.wrapper {
-  width: 80%;
-  margin: 0 auto;
-  padding: 16px;
-}
 .commands {
   background-color: #f9f6f2;
   border-radius: 3px;
