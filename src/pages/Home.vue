@@ -1,10 +1,6 @@
 <template>
-  <div class="container">
-    <header class="header">
-      <h1>Text Formatter</h1>
-      <h4>quickly format your text</h4>
-    </header>
-    <main class="wrapper">
+  <main class="wrapper">
+    <div class="content">
       <div class="left commands">
         <ul>
           <li class="command">
@@ -82,42 +78,19 @@
         <textarea class="textarea" readonly>{{result}}</textarea>
       </div>
       <div class="info">Number of affected characters: 0</div>
-      <div class="details">
-        <div class="how-tos">
-          <h3>How to's</h3>
-          <ul>
-            <li>
-              Regular expression are also supported. Give it a try
-              <strong>\w.</strong>
-            </li>
-          </ul>
-        </div>
-        <div class="how-tos">
-          <h3>How to's</h3>
-          <ul>
-            <li>
-              Regular expression are also supported. Give it a try
-              <strong>\w</strong>
-            </li>
-          </ul>
-        </div>
-        <div class="how-tos">
-          <h3>Credits</h3>
-          <p>
-            Developed and maintained by Sean Ervinson. Special thanks to jsonlint.com for the inspiration.
-            Source code can be found here.
-          </p>
-        </div>
-      </div>
-    </main>
-    <footer class="footer">&copy; 2019 textlint.com</footer>
-  </div>
+      <Details></Details>
+    </div>
+  </main>
 </template>
 
 <script>
 import actions from "@/action";
+import Details from "../components/Details.vue";
 
 export default {
+  components: {
+    Details
+  },
   data() {
     return {
       source: "",
@@ -158,7 +131,13 @@ export default {
 .wrapper {
   width: 80%;
   margin: 0 auto;
-  padding: 16px;
+  padding: 0px 16px;
+  min-height: calc(100% - 90px);
+  margin-bottom: -60px;
+}
+.wrapper::after {
+  content: "";
+  display: block;
 }
 .commands {
   background-color: #f9f6f2;
@@ -188,9 +167,6 @@ export default {
 }
 .info {
   background-color: #8ba8b7;
-}
-.details li {
-  list-style-type: square;
 }
 .control-inline {
   display: inline-block;
