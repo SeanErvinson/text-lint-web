@@ -12,6 +12,8 @@ let actions = {
         return String(source).replace(pattern, "")
     },
     removeValues(source, value, caseSensitive = false) {
+        if(String(value).length == 0 || value == null)
+            return "";
         var pattern = new RegExp(`${value}+`, 'g' + (caseSensitive ? "i" : ""));
         return String(source).replace(pattern, "")
     },
@@ -20,6 +22,18 @@ let actions = {
     },
     allLower(source) {
         return String(source).toLocaleLowerCase();
+    },
+    replacesWith(source, oldPattern, newPattern, caseSensitive = false) {
+        var pattern = new RegExp(`[${oldPattern}]+`, 'g' + (caseSensitive ? "i" : ""));
+        return String(source).replace(pattern, newPattern)
+    },
+    getMatches(source, value, caseSensitive = false) {
+        var pattern = new RegExp(`[${value}]+`, 'g' + (caseSensitive ? "i" : ""));
+        return String(source).match(pattern).length;
+    },
+    removeAllWhiteCharacters(source) {
+        var pattern = new RegExp("\\s+", 'g');
+        return String(source).replace(pattern, "")
     }
 }
 
