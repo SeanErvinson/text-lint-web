@@ -4,13 +4,21 @@
       <div class="left commands">
         <ul>
           <li class="command">
-            <i class="fas fa-upload"></i>
+            <input @change="fileUpload" type="file" id="source-file" hidden />
+            <a @click="activateUpload" title="Upload file" id="source-file-btn">
+              <i class="fas fa-upload"></i>
+            </a>
           </li>
           <li class="command">
-            <i class="far fa-clipboard"></i>
-          </li>|
+            <a @click="copyClipboard" title="Copy to clipboard" id="source-copy-clipboard">
+              <i class="far fa-clipboard"></i>
+            </a>
+          </li>
+          <span class="fixed">|</span>
           <li class="command">
-            <i class="fas fa-eraser"></i>
+            <a @click="clearText" id="source-clear" title="Clear text">
+              <i class="fas fa-eraser"></i>
+            </a>
           </li>
         </ul>
       </div>
@@ -18,7 +26,7 @@
         <textarea v-model="source" class="textarea" placeholder="Enter your text here."></textarea>
       </div>
       <div class="controls">
-        <ul>
+        <ul class="remove-controls">
           <li>
             <button @click="removeWhitespaces" class="control-btn">Remove whitespaces</button>
           </li>
@@ -36,6 +44,19 @@
               <input v-model="removeValue" type="text" class="control-input" />
             </div>
           </li>
+        </ul>
+        <hr />
+        <ul class="replace-controls">
+          <li>
+            <div>
+              <input v-model="oldPatternValue" type="text" class="control-input" />
+              <button @click="replacesWith" class="control-btn">Replace with</button>
+              <input v-model="newPatternValue" type="text" class="control-input" />
+            </div>
+          </li>
+        </ul>
+        <hr />
+        <ul class="modify-controls">
           <li>
             <button @click="allUpper" class="control-btn">ALL UPPER</button>
           </li>
@@ -64,20 +85,22 @@
       <div class="right commands">
         <ul>
           <li class="command">
-            <i class="fas fa-save"></i>
+            <a @click="copyClipboard" title="Copy to clipboard" id="result-copy-clipboard">
+              <i class="far fa-clipboard"></i>
+            </a>
           </li>
+          <span class="fixed">|</span>
           <li class="command">
-            <i class="far fa-clipboard"></i>
-          </li>|
-          <li class="command">
-            <i class="fas fa-eraser"></i>
+            <a @click="clearText" id="result-clear" title="Clear text">
+              <i class="fas fa-eraser"></i>
+            </a>
           </li>
         </ul>
       </div>
       <div class="result">
         <textarea class="textarea" readonly>{{result}}</textarea>
       </div>
-      <div class="info">Number of affected characters: 0</div>
+      <div class="info">Number of affected characters: {{affectedCharacters}}</div>
       <Details></Details>
     </div>
   </main>
@@ -97,18 +120,41 @@ export default {
       result: "",
       removeValue: "",
       caseSensitive: false,
-      persistent: false
+      persistent: false,
+      oldPatternValue: "",
+      newPatternValue: "",
+      affectedCharacters: 0
     };
   },
   methods: {
+    activateUpload() {
+      document.getElementById("source-file").click();
+    },
+    fileUpload() {
+      let file = document.getElementById("source-file").files[0];
+      var fileReader = new FileReader();
+      fileReader.onload = event => {
+        this.source = event.target.result;
+      };
+      fileReader.readAsText(file, "UTF-8");
+    },
     removeWhitespaces() {
       this.result = actions.removeWhitespaces(this.source, this.caseSensitive);
+      this.affectedCharacters = Math.abs(
+        this.source.length - this.result.length
+      );
     },
     removeTabs() {
       this.result = actions.removeTabs(this.source, this.caseSensitive);
+      this.affectedCharacters = Math.abs(
+        this.source.length - this.result.length
+      );
     },
     removeLineBreaks() {
       this.result = actions.removeLineBreaks(this.source, this.caseSensitive);
+      this.affectedCharacters = Math.abs(
+        this.source.length - this.result.length
+      );
     },
     removeValues() {
       this.result = actions.removeValues(
@@ -116,12 +162,46 @@ export default {
         this.removeValue,
         this.caseSensitive
       );
+      this.affectedCharacters = Math.abs(
+        this.source.length - this.result.length
+      );
     },
     allUpper() {
       this.result = actions.allUpper(this.source);
+      this.affectedCharacters = actions.removeAllWhiteCharacters(
+        this.result
+      ).length;
     },
     allLower() {
       this.result = actions.allLower(this.source);
+      this.affectedCharacters = actions.removeAllWhiteCharacters(
+        this.result
+      ).length;
+    },
+    replacesWith() {
+      this.result = actions.replacesWith(
+        this.source,
+        this.oldPatternValue,
+        this.newPatternValue,
+        this.caseSensitive
+      );
+      this.affectedCharacters = actions.getMatches(
+        this.source,
+        this.oldPatternValue
+      );
+    },
+    clearText() {
+      if (event.currentTarget.id == "source-clear") this.source = "";
+      else this.result = "";
+      this.affectedCharacters = 0;
+    },
+    copyClipboard(event) {
+      let textarea;
+      if (event.currentTarget.id == "source-copy-clipboard")
+        textarea = document.querySelector(".source>textarea");
+      else textarea = document.querySelector(".result>textarea");
+      textarea.select();
+      document.execCommand("copy");
     }
   }
 };
@@ -131,13 +211,18 @@ export default {
 .wrapper {
   width: 80%;
   margin: 0 auto;
-  padding: 0px 16px;
+  padding: 16px 16px;
   min-height: calc(100% - 90px);
-  margin-bottom: -60px;
+  margin-bottom: -72px;
 }
 .wrapper::after {
   content: "";
   display: block;
+}
+command input[type="file"] {
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.3333333333333333em;
+  font-weight: 900;
 }
 .commands {
   background-color: #f9f6f2;
@@ -153,6 +238,15 @@ export default {
 }
 .command:hover {
   color: #224372;
+}
+.fixed {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .textarea {
   border: none;
@@ -170,7 +264,7 @@ export default {
 }
 .control-inline {
   display: inline-block;
-  margin-right: 8px;
+  width: 50%;
 }
 .control-btn {
   color: white;
@@ -179,7 +273,7 @@ export default {
   border-radius: 5px;
   text-align: center;
   padding: 6px 4px;
-  margin-bottom: 8px;
+  margin: 4px 0px;
 }
 .control-btn:hover {
   background-color: #8ba8b7;
@@ -188,6 +282,9 @@ export default {
   padding: 4px;
   text-align: center;
   height: 3em;
-  width: 5em;
+  width: 90%;
+}
+.controls {
+  text-align: center;
 }
 </style>
