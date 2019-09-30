@@ -12,7 +12,7 @@ let actions = {
         return String(source).replace(pattern, "")
     },
     removeValues(source, value, caseSensitive = false) {
-        if(String(value).length == 0 || value == null)
+        if (String(value).length == 0 || value == null)
             return "";
         var pattern = new RegExp(`${value}+`, 'g' + (caseSensitive ? "i" : ""));
         return String(source).replace(pattern, "")
@@ -28,8 +28,13 @@ let actions = {
         return String(source).replace(pattern, newPattern)
     },
     getMatches(source, value, caseSensitive = false) {
+        if (String(value).length == 0 || value == null)
+            return 0;
         var pattern = new RegExp(`[${value}]+`, 'g' + (caseSensitive ? "i" : ""));
-        return String(source).match(pattern).length;
+        var matches =  String(source).match(pattern);
+        if(matches == null)
+            return 0;
+        return matches.length;
     },
     removeAllWhiteCharacters(source) {
         var pattern = new RegExp("\\s+", 'g');
