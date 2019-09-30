@@ -50,7 +50,9 @@
           <li>
             <div>
               <input v-model="oldPatternValue" type="text" class="control-input" />
-              <button @click="replacesWith" class="control-btn">Replace with</button>
+              <div>
+                <button @click="replacesWith" class="control-btn">Replace with</button>
+              </div>
               <input v-model="newPatternValue" type="text" class="control-input" />
             </div>
           </li>
@@ -64,20 +66,20 @@
             <button @click="allLower" class="control-btn">all lower</button>
           </li>
           <li>
-            <div>
-              <input
-                id="caseSensitive"
-                type="checkbox"
-                v-model="caseSensitive"
-                :value="caseSensitive"
-              />
-              <label for="caseSensitive">Case Sensitive</label>
-            </div>
-          </li>
-          <li>
-            <div>
-              <input id="persistent" type="checkbox" v-model="persistent" :value="persistent" />
-              <label for="persistent">Persistent</label>
+            <div class="global-controls">
+              <div>
+                <input
+                  id="caseSensitive"
+                  type="checkbox"
+                  v-model="caseSensitive"
+                  :value="caseSensitive"
+                />
+                <label for="caseSensitive">Case Sensitive</label>
+              </div>
+              <div>
+                <input id="persistent" type="checkbox" v-model="persistent" :value="persistent" />
+                <label for="persistent">Persistent</label>
+              </div>
             </div>
           </li>
         </ul>
@@ -143,18 +145,21 @@ export default {
       this.affectedCharacters = Math.abs(
         this.source.length - this.result.length
       );
+      this.executePersistence();
     },
     removeTabs() {
       this.result = actions.removeTabs(this.source, this.caseSensitive);
       this.affectedCharacters = Math.abs(
         this.source.length - this.result.length
       );
+      this.executePersistence();
     },
     removeLineBreaks() {
       this.result = actions.removeLineBreaks(this.source, this.caseSensitive);
       this.affectedCharacters = Math.abs(
         this.source.length - this.result.length
       );
+      this.executePersistence();
     },
     removeValues() {
       this.result = actions.removeValues(
@@ -165,18 +170,21 @@ export default {
       this.affectedCharacters = Math.abs(
         this.source.length - this.result.length
       );
+      this.executePersistence();
     },
     allUpper() {
       this.result = actions.allUpper(this.source);
       this.affectedCharacters = actions.removeAllWhiteCharacters(
         this.result
       ).length;
+      this.executePersistence();
     },
     allLower() {
       this.result = actions.allLower(this.source);
       this.affectedCharacters = actions.removeAllWhiteCharacters(
         this.result
       ).length;
+      this.executePersistence();
     },
     replacesWith() {
       this.result = actions.replacesWith(
@@ -189,6 +197,7 @@ export default {
         this.source,
         this.oldPatternValue
       );
+      this.executePersistence();
     },
     clearText() {
       if (event.currentTarget.id == "source-clear") this.source = "";
@@ -202,6 +211,9 @@ export default {
       else textarea = document.querySelector(".result>textarea");
       textarea.select();
       document.execCommand("copy");
+    },
+    executePersistence() {
+      if (this.persistent) this.source = this.result;
     }
   }
 };
@@ -286,5 +298,8 @@ command input[type="file"] {
 }
 .controls {
   text-align: center;
+}
+.global-controls {
+  text-align: left;
 }
 </style>
