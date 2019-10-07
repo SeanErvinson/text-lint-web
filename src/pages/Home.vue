@@ -231,11 +231,6 @@ export default {
   content: "";
   display: block;
 }
-command input[type="file"] {
-  font-family: "Font Awesome 5 Free";
-  font-size: 1.3333333333333333em;
-  font-weight: 900;
-}
 .commands {
   background-color: #f9f6f2;
   border-radius: 3px;
@@ -269,10 +264,12 @@ command input[type="file"] {
   width: 100%;
   resize: none;
   padding: 8px;
+  font-size: 1em;
   font-family: "Open Sans", sans-serif;
 }
 .info {
   background-color: #8ba8b7;
+  padding: 4px 8px;
 }
 .control-inline {
   display: inline-block;
@@ -291,15 +288,31 @@ command input[type="file"] {
   background-color: #8ba8b7;
 }
 .control-input {
-  padding: 4px;
   text-align: center;
-  height: 3em;
+  font-size: 1em;
+  padding: 8px 4px;
   width: 90%;
+  border-radius: 5px;
 }
 .controls {
   text-align: center;
 }
 .global-controls {
   text-align: left;
+}
+.details li {
+  list-style-type: square;
+}
+button {
+  color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  text-align: center;
+  padding: 4px;
+  width: 100%;
+}
+button:hover {
+  background-color: #8ba8b7;
 }
 </style>
