@@ -100,7 +100,7 @@
         </ul>
       </div>
       <div class="result">
-        <textarea class="textarea" readonly>{{result}}</textarea>
+        <textarea class="textarea" v-model="result" readonly></textarea>
       </div>
       <div class="info">Number of affected characters: {{affectedCharacters}}</div>
       <Details></Details>
