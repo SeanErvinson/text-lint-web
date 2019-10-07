@@ -1,29 +1,39 @@
-# text-formatter
+# TextLint
 
-## Project setup
+TextLint is a tool that helps modify and manipulate strings. Copy and paste, or directly type and click on the buttons to modify the text.
+
+
+## Prerequisites
+
+You will need to have the following:
+
+- [Node.js](https://nodejs.org/en/)
+
+- [Vue Cli](https://cli.vuejs.org/)
+
+## Setup
+Once you have the necessary tools. Execute
+```
+git clone git@github.com:SeanErvinson/text-lint-web.git
+```
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Usage
+Enter your text on the textarea and modify it with the buttons.
 
-### Run your tests
-```
-npm run test
-```
+## Built With
 
-### Lints and fixes files
-```
-npm run lint
-```
+* [Vue.js](https://nodejs.org/en/)
+* HTML
+* CSS
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Authors
+
+* **Ong, Sean Ervinson** - [SeanErvinsn](https://seanervinson.com)
