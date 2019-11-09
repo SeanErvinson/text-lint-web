@@ -102,7 +102,10 @@
       <div class="result">
         <textarea class="textarea" v-model="result" readonly></textarea>
       </div>
-      <div class="info">Number of affected characters: {{affectedCharacters}}</div>
+      <div class="info">
+        <p>Number of characters: {{getCharacterCount}}</p>
+        <p>Number of affected characters: {{affectedCharacters}}</p>
+      </div>
       <Details></Details>
     </div>
   </main>
@@ -127,6 +130,11 @@ export default {
       newPatternValue: "",
       affectedCharacters: 0
     };
+  },
+  computed: {
+    getCharacterCount() {
+      return this.source.length;
+    }
   },
   methods: {
     activateUpload() {
@@ -269,6 +277,8 @@ export default {
 }
 .info {
   background-color: #8ba8b7;
+  display: flex;
+  justify-content: space-between;
   padding: 4px 8px;
 }
 .control-inline {
