@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+ul, textarea {
+    margin: 0;
+    padding: 0;
+}
+a{
+    cursor: pointer;
+}
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    background-color: #457B9D;
+    color: white;
+}
+h1, h2, h3, h4, p {
+    margin: 0;
+}
+li {
+    list-style-type: none;
+}
+header {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    padding: 16px;
+}
+footer {
+    background-color: #132743;
+    text-align: center;
+    display: flex;
+}
+button{
+    font-size: .8em;
+}
+footer, .wrapper::after{
+    height: 72px;
+}
+footer div{
+    margin: auto;
+    justify-content: center;
+}
+@media screen and (max-width: 1032px) {
+    .controls{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+   }
+    .controls li{
+        padding: 0px 4px;
+   }
+    .controls ul{
+        align-self: center;
+        flex-basis: 33%;
+        flex-grow: 0;
+   }
+}
+@media screen and (min-width: 1032px){
+    button,label{
+        font-size: .67em;
+   }
+}
+@media screen and (min-width: 1200px){
+    button,label{
+        font-size: .85em;
+   }
+}
+@media screen and (max-width: 768px) {
+    .textarea {
+        width: 100%;
+   }
+    button,label{
+        font-size: .8em;
+   }
+}
+@supports (display: grid) {
+    .content {
+        display: grid;
+   }
+    .source {
+        grid-area: source;
+   }
+    .controls {
+        grid-area: controls;
+        justify-self: center;
+   }
+    .result {
+        grid-area: result;
+   }
+    .info {
+        grid-area: info;
+   }
+    .details {
+        grid-area: details;
+   }
+    .left.commands {
+        grid-area: lcommand;
+   }
+    .right.commands {
+        grid-area: rcommand;
+   }
+    @media screen and (max-width: 1032px) {
+        .content {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto auto auto auto 1fr;
+            grid-template-areas: "lcommand" "source" "controls" "rcommand" "result" "info" "details";
+            row-gap: 10px;
+            column-gap: 10px;
+       }
+   }
+    @media screen and (min-width: 1032px) {
+        .content {
+            grid-template-columns: 3fr 1fr 3fr;
+            grid-template-rows: auto auto auto 1fr;
+            grid-template-areas: "lcommand empty rcommand" "source controls result" "info info info" "details details details";
+            row-gap: .5em;
+            column-gap: 2em;
+       }
+   }
+}
